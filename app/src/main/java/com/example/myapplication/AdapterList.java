@@ -14,7 +14,7 @@ public class AdapterList {
     final String HEADING="heading";
     final String BODY="body";
     public List<Map<String, String>> adapterList;
-    public AdapterList(String ListText){
+    public AdapterList(ArrayList<String> ListText){
         adapterList=prepareContent(ListText);
     }
 
@@ -24,15 +24,22 @@ public class AdapterList {
     }
 
     @NonNull
-    private List<Map<String, String>> prepareContent(String ListText) {
+    private List<Map<String, String>> prepareContent(ArrayList<String> listText) {
         List<Map<String, String>> temp= new ArrayList<>();
-        String[] values = ListText.split("\n\n");
-        for(int i=0;i<values.length;i++){
+        for(int i=0;i<listText.size();i++){
             Map<String,String> mapItem=new HashMap<>();
-            mapItem.put(HEADING,String.valueOf(values[i].length()));
-            mapItem.put(BODY,values[i]);
+            mapItem.put(HEADING,String.valueOf(listText.get(i).length()));
+            mapItem.put(BODY,listText.get(i));
             temp.add(mapItem);
         }
         return temp;
+    }
+
+    public List<Map<String, String>> getAdapterList() {
+        return adapterList;
+    }
+
+    public void setAdapterList(List<Map<String, String>> adapterList) {
+        this.adapterList = adapterList;
     }
 }
