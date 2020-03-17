@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private AdapterList adapterList;
     private SimpleAdapter adapter;
     private ArrayList<String> temp;
-    File source;
+    private File source;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContent().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                adapterList.adapterList.remove(parent.getItemAtPosition(position));
+                adapterList.adapterList.remove(position);
                 removeFromFile(source, position);
                 adapter.notifyDataSetChanged();
             }
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
             temp = lines;
         } catch (IOException e) {
-            Toast.makeText(this,"error while opening file",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,getString(R.string.errorOpenFile),Toast.LENGTH_LONG).show();
         }
     }
 
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         try (FileWriter toSource = new FileWriter(source, false)) {
             toSource.append(getString(R.string.large_text));
         } catch (IOException e) {
-            Toast.makeText(this,"error while opening file",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,getString(R.string.errorOpenFile),Toast.LENGTH_LONG).show();
         }
     }
 
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         try (FileWriter toSource = new FileWriter(source, false)){
             toSource.append(temp.toString());
         } catch (IOException e) {
-            Toast.makeText(this,"error while opening file",Toast.LENGTH_LONG).show();;
+            Toast.makeText(this,getString(R.string.errorOpenFile),Toast.LENGTH_LONG).show();
         }
     }
 
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             temp = lines;
             writeStringToFile(source);
         } catch (IOException e) {
-            Toast.makeText(this,"error while opening file",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,getString(R.string.errorOpenFile),Toast.LENGTH_LONG).show();
         }
     }
 }
